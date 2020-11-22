@@ -1,6 +1,7 @@
 package com.example.springcustomvalidator.services.Impl;
 
 import com.example.springcustomvalidator.dto.PersonDTO;
+import com.example.springcustomvalidator.dto.transactionBodyRq.ReqDTO;
 import com.example.springcustomvalidator.mappers.PersonMapper;
 import com.example.springcustomvalidator.models.Person;
 import com.example.springcustomvalidator.repositories.PersonRepository;
@@ -10,10 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -34,9 +33,10 @@ public class PersonServiceImpl implements PersonService {
 
     @Transactional
     @Override
-    public void createPerson(PersonDTO dto) {
+    public void createPerson(ReqDTO<PersonDTO> rq) {
         Person person;
-        person = personMapper.toEntity(dto);
+        PersonDTO personDTO = rq.getSeaReq().getBody().getTransaction().getData();
+        person = personMapper.toEntity(personDTO);
 
         LocalDateTime localDateTime = LocalDateTime.now();
         person.setTimeUpdate(localDateTime);

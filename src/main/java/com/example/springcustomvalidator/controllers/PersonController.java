@@ -1,6 +1,7 @@
 package com.example.springcustomvalidator.controllers;
 
 import com.example.springcustomvalidator.dto.PersonDTO;
+import com.example.springcustomvalidator.dto.transactionBodyRq.ReqDTO;
 import com.example.springcustomvalidator.models.Person;
 import com.example.springcustomvalidator.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,8 @@ public class PersonController {
     private PersonService personService;
 
     @PostMapping("/create")
-    public ResponseEntity<Void> createPerson(@Valid @RequestBody PersonDTO personDTO){
-        this.personService.createPerson(personDTO);
+    public ResponseEntity<Void> createPerson(@Valid @RequestBody ReqDTO<PersonDTO> rq){
+        this.personService.createPerson(rq);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
