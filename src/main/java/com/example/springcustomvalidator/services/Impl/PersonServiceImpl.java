@@ -12,16 +12,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
 public class PersonServiceImpl implements PersonService {
-    public final static String DATE_FORMAT = "dd-MM-yyyy HH:mm:ss";
-    public final static DateTimeFormatter FORMATTER = DateTimeFormatter
-            .ofPattern(DATE_FORMAT)
-            .withZone(ZoneId.of("Asia/Ho_Chi_Minh"));
+
     @Autowired
     private PersonRepository personRepository;
 
